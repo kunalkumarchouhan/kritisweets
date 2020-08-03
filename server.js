@@ -9,7 +9,7 @@ const login  = require('./routes/login');
 const signup = require('./routes/signup');
 const orders = require('./routes/orders');
 const auth   = require('./auth');
-if (process.env.NODE_ENV) { require('dotenv').config(); }
+//if (process.env.NODE_ENV) { require('dotenv').config(); }
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
