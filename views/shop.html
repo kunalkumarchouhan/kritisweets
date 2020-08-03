@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kriti Sweets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <style type="text/css">
+    main {
+      padding: 20px;
+      background-color: #eee;
+      margin: 0;
+    }
+    .mastfoot {
+      padding: 20px;
+      background-color: #eee;
+      color: #222;
+    }
+  </style>
+</head>
+<body class="text-center ">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"><b>Kriti Sweets</b></a>
+  </nav>
+  <main class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <form>
+        <h1>Add Items To Cart</h1>
+        <div class="form-group row">
+          <div class="col-12 mb-3">
+            <select class="custom-select" id="itemList">
+              <option selected disabled>Select Item</option>
+            </select>
+          </div>
+          <div class="col-12  mb-3">
+            <select class="custom-select" id="unitList">
+              <option selected disabled>Select Item First</option>
+            </select>
+          </div>
+          <div class="col-12  mb-3 form-group">
+            <input class="form-control" type="number" id="quantity" placeholder="Quantity" min=1>
+          </div>
+          <div class="col-12">
+            <button type="button" id="addCart" class="btn btn-block btn-sm mb-3 btn-primary">Add To Cart</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-9">
+      <h1>Cart</h1>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Item</th>
+            <th scope="col">Price per Unit</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody id="cart">
+
+        </tbody>
+        <tbody id="total" class="bg-dark text-white">
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-6 ml-auto mr-auto">
+      <form id="checkout">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <input class="form-control" type="name" pattern="[A-Za-z]{1,}" id="name" placeholder="Name" required>
+          </div>
+          <div class="col-sm-6">
+            <input class="form-control" type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" id="phone" placeholder="Phone" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12 form-group">
+            <textarea class="form-control" id="address" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary ml-3">CheckOut</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </main>
+  <footer class="mastfoot mt-auto">
+      <div class="inner">
+        <p>Address: Pakhnaha Chowk, NH-28, Kanti, Muzaffarpur.</p>
+        <p>Contact: +91 7992322764</p>
+      </div>
+    </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    const items = [{
+      name: "Rasmadhuri",
+      pricePerUnit: {
+        piece: 30
+      },
+    },{
+      name: "Kala Jamun (Cream)",
+      pricePerUnit: {
+        piece: 15,
+        kg: 260
+      }
+    },{
+      name: "Kala Jamun",
+      pricePerUnit: {
+        piece: 10,
+        kg: 240
+      }
+    },{
+      name: "Rosogulla",
+      pricePerUnit: {
+        piece: 12,
+        kg: 220
+      }
+    },{
+      name: "Cream Cup",
+      pricePerUnit: {
+        piece: 15,
+        kg: 260
+      }
+    },{
+      name: "Chena (Dry)",
+      pricePerUnit: {
+        piece: 10,
+        kg: 240
+      }
+    },{
+      name: "Laddu",
+      pricePerUnit: {
+        piece: 5,
+        kg: 150
+      }
+    },{
+      name: "Laddu (Besan)",
+      pricePerUnit: {
+        piece: 5,
+        kg: 130
+      }
+    },{
+      name: "Peda ",
+      pricePerUnit: {
+        piece: 10,
+        kg: 360
+      }
+    },{
+      name: "Ghee",
+      pricePerUnit: {
+        kg: 600
+      }
+    },{
+      name: "Khoya",
+      pricePerUnit: {
+        kg: 400
+      }
+    },{
+      name: "Paneer",
+      pricePerUnit: {
+        kg: 400
+      }
+    },{
+      name: "Dahi ( 1 Jar)",
+      pricePerUnit: {
+        piece: 1600,
+      }
+    }];
+    $(document).ready(function() {
+      const cart = [];
+      function updateCart() {
+        if (cart.length > 0) {
+          const rows = cart.map((item, idx) => {
+            return (`
+              <tr id="cartitem${idx}">
+                <th scope="row">${idx + 1}</th>
+                <td>${item.name}</td>
+                <td>Rs. ${item.pricePerUnit} / ${item.unit}</td>
+                <td>${item.quantity} ${item.unit}</td>
+                <td>Rs. ${item.quantity * item.pricePerUnit}</td>
+              </tr>
+            `);
+          });
+          const total = cart.map(({quantity, pricePerUnit}) => quantity * pricePerUnit).reduce((a,b) => a+b)
+          $('#cart').html(rows);
+          $('#total').html(`
+            <tr>
+              <td colspan="4"><b>Total Amount<b></td>
+              <td>Rs. ${total}</td>
+            </tr>
+          `);
+        }
+        else {
+          $('#cart').html('<tr><td colspan="5"><h4>Cart is Empty</h4></td></tr>');
+        }
+      }
+      updateCart();
+      const options = items.map(item => `<option value="${item.name}">${item.name}</option>`);
+      $('#itemList').append(options.toString());
+
+      $('#itemList').change(function(e) {
+        const units = items.filter(item => item.name === e.target.value)[0].pricePerUnit;
+        $('#unitList').html(Object.keys(units).map(unit => `<option value="${units[unit]}">${units[unit]} per ${unit}</option>`));
+      });
+
+      $('#addCart').click(function() {
+        const name = $('#itemList').val();
+        const pricePerUnit = $('#unitList').val();
+        const quantity = $('#quantity').val();
+        const unit = $('#unitList').val() > 50 ? 'kg' : 'piece';
+        cart.push({ name, pricePerUnit, quantity, unit});
+        console.log(cart);
+        updateCart();
+      });
+
+
+      $('#checkout').submit(function(e) {
+        e.preventDefault();
+        if(cart.length === 0) {
+          alert("Add items to cart to place order.");
+        }
+        else {
+          fetch('/order/new', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: $('#name').val(),
+              phone: $('#phone').val(),
+              address: $('#address').val(),
+              items: cart
+            })
+          })
+          .then(res => res.json())
+          .then(res => {
+            alert("Order Place Successfully. ");
+            location.reload();
+          })
+          .catch(err => alert("An Error occured"));
+        }
+      });
+    });
+  </script>
+</body>
+</html>
