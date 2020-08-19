@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session    = require('express-session');
 const passport   = require('passport');
 const flash      = require('connect-flash');
+const cors       = require('cors');
 const app    = express();
 const login  = require('./routes/login');
 const signup = require('./routes/signup');
@@ -22,6 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.set("view engine", "ejs");
+app.use(cors());
 mongoose.connect(process.env.DATABASE, {
   useCreateIndex: true,
   useNewUrlParser: true,
