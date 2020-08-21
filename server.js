@@ -10,7 +10,9 @@ const login  = require('./routes/login');
 const signup = require('./routes/signup');
 const orders = require('./routes/orders');
 const auth   = require('./auth');
-//if (process.env.NODE_ENV) { require('dotenv').config(); }
+const http   = require('http').createServer(app);
+const io     = require('socket.io').listen(http);
+if (process.env.NODE_ENV) { require('dotenv').config(); }
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,14 +24,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.set("view engine", "ejs");
 app.use(cors());
+app.use(express.static(__dirname + '/static'));
+app.set("view engine", "ejs");
+app.set('io', io);
 mongoose.connect(process.env.DATABASE, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true
 }, (error) => { if (error) console.error("Connection Error : " + error); });
+
+const port = process.env.PORT || 3000;
+http.listen(port, () => console.log(`Server is running on port ${port}`));
 
 const db = mongoose.connection;
 db.on('open', () => {
@@ -49,7 +56,4 @@ app.get('/signin', (req, res) => {
 
 app.get('/shop', (req, res) => {
   res.sendFile(__dirname + '/views/shop.html');
-})
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+});
