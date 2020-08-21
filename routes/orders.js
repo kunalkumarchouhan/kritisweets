@@ -13,6 +13,8 @@ router.post('/new', (req, res) => {
       const { _id, items, phone } = order;
       const price = items.map(({quantity, pricePerUnit}) => quantity * pricePerUnit).reduce((a,b) => a+b);
       sendConfirmation(phone, _id, price, (error, result) => { console.log("New Order Received"); });
+      const io = req.app.get('io');
+      io.emit('neworder', _id);
       res.json({ order });
     }
   });
@@ -20,7 +22,11 @@ router.post('/new', (req, res) => {
 
 router.get('/list', ensureAuthenticated, (req, res) => {
   orderList((error, list) => {
-    error ? res.json({ error }) : res.json({ list });
+    if (error) {
+      res.json({ error });
+      return;
+    }
+    res.render('../views/orders.ejs', {list});
   });
 });
 
@@ -33,7 +39,7 @@ router.get('/:order', verifyId, (req, res) => {
     else if (order) {
       const {name, phone, address, items, _id } = order;
       const price = items.map(({quantity, pricePerUnit}) => quantity * pricePerUnit).reduce((a,b) => a+b);
-      const total = price >= 150 ? price : price + 20;
+      const total = price >= 200 ? price : price + 20;
       res.render('../views/order.ejs', {name, phone, address, items, total, _id });
     }
     else {
