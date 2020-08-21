@@ -4,12 +4,6 @@
   <title>Kriti Sweets</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <style type="text/css">
-    html,
-    body {
-      height: 100%;
-    }
-  </style>
 </head>
 <body>
   <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light">
@@ -17,65 +11,42 @@
   </nav>
   <div class="container-fluid">
     <div class="row">
-      <div class="col mt-5">
+      <div class="col">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
               <tr>
-                <th colspan="4" class="text-center">
-                  <h3>Order's Details</h3>
+                <th colspan="5" class="text-center">
+                  <h3>Orders' List</h3>
                 </th>
               </tr>
-            </thead>
-            <tbody>
               <tr>
-                <td colspan="2">Order ID</td>
-                <td colspan="2"><%= _id %></td>
-              </tr>
-              <tr>
-                <td colspan="2">Name</td>
-                <td colspan="2"><%= name %></td>
-              </tr>
-              <tr>
-                <td colspan="2">Phone</td>
-                <td colspan="2"><%= phone %></td>
-              </tr>
-              <tr>
-                <td colspan="2">Address</td>
-                <td colspan="2"><%= address %></td>
-              </tr>
-            </tbody>
-            <thead>
-              <tr>
-                <th>Item Name</th>
-                <th>Rate</th>
-                <th>Quantity</th>
-                <th>Price</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Date</th>
               </tr>
             </thead>
             <tbody>
-              <% for (var i = 0; i < items.length; i++) { %>
-                <tr>
-                  <td><%= items[i].name %></td>
-                  <td>Rs. <%= items[i].pricePerUnit %>/<%= items[i].unit %></td>
-                  <td><%= items[i].quantity %> <%= items[i].unit %></td>
-                  <td>Rs. <%= items[i].quantity * items[i].pricePerUnit %></td>
+              <% if (list.length === 0) { %>
+                <tr class="text-center text-danger">
+                  <th colspan="5"><h1>No Orders yet.</h1></th>
                 </tr>
               <% } %>
-              <tr class="bg-dark text-light">
-                <td colspan="3">Delivery Charge</td>
-                <td>
-                  Rs. <% if(total >= 200) { %>
-                    0
-                  <% } else { %>
-                    20
-                  <% } %>
-                </td>
-              </tr>
-              <tr class="bg-dark text-light">
-                <td colspan="3">Grand Total</td>
-                <td>Rs. <%= total %></td>
-              </tr>
+              <% for (let i = 0; i < list.length; i++) { %>
+                <tr>
+                  <th scope="row">
+                    <a href="/order/<%= list[i]._id %>">
+                      <%= list[i]._id %>
+                    </a>
+                  </th>
+                  <td><%= list[i].name %></td>
+                  <td><%= list[i].phone %></td>
+                  <td><%= list[i].address %></td>
+                  <td><%= list[i].date %></td>
+                </tr>
+              <% } %>
             </tbody>
           </table>
         </div>
