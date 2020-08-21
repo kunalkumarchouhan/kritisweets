@@ -12,7 +12,7 @@ const orders = require('./routes/orders');
 const auth   = require('./auth');
 const http   = require('http').createServer(app);
 const io     = require('socket.io').listen(http);
-if (process.env.NODE_ENV) { require('dotenv').config(); }
+//if (process.env.NODE_ENV) { require('dotenv').config(); }
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
