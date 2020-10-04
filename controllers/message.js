@@ -12,7 +12,7 @@ const sendConfirmation = (contacts, orderID, amount, callback) => {
     "sender_id": "FSTSMS",
     "language": "english",
     "route": "qt",
-    "numbers": ${process.env.CONTACT},//`${contacts}`
+    "numbers": `${process.env.CONTACT}`,//`${contacts}`
     "message": process.env.TEMPLATE,
     "variables": "{#EE#}|{#AA#}",
     "variables_values": `${orderID}|${total}`
